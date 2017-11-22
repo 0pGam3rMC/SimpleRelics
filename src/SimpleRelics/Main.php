@@ -1,22 +1,4 @@
 <?php
-
-
-/*
- * Public Simple Relic Plugin
- *
- * Copyright (C) 2017 DiamondGames30
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- */
- 
  
 namespace SimpleRelics;
 
@@ -79,7 +61,7 @@ class Main extends PluginBase implements Listener{
 
 	//////////////////////// Open Relic ////////////////////////
 	
-		public function onTap(PlayerInteractEvent $event) {
+		public function onInteract(PlayerInteractEvent $event) {
 	
 			$player = $event->getPlayer();
 			$item = $player->getInventory()->getItemInHand();
@@ -89,18 +71,11 @@ class Main extends PluginBase implements Listener{
 					$player->getInventory()->removeItem(Item::get(Item::NETHER_STAR, 0, 1));
 					$player->addTitle(TF::GRAY . "Uncovering", TF::GOLD . TF::BOLD . "Relic");
 					
-					$open = $player->addTitle(TF::GREEN . "You have received", TF::GREEN . "your rewards!");
+				foreach($this->getConfig()->get("relic-loot") as $rewards) {
 					
-					$this->getServer()->getScheduler()->scheduleDelayedTask($open, 100);
+					$player->getInventory()->addItem(Item::get($rewards, 0, mt_rand(1, $this->getConfig()->get("relic-max"))));
 					
-					
-				foreach($this->getConfig()->get("relic-loot") as $rewards){
-					
-					$give = $player->getInventory()->addItem(Item::get($rewards, 0, mt_rand(1,$this->getConfig()->get("relic-max"))));
-					
-					$this->getServer()->getScheduler()->scheduleDelayedTask($give, 500);
-
-			}
+				}
 		}
 	}
 }
