@@ -7,7 +7,7 @@ relic-loot:
 - "2"
 - "3"
 
-# Max amount of items you can get
+# Amount of items you get
 
 relic-max: 64
 ...
