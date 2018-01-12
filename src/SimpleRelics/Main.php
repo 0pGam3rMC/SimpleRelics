@@ -45,10 +45,10 @@ class Main extends PluginBase implements Listener{
 					$player = $event->getPlayer();
 					$name = $player->getName();
 			
-					$tier1 = Item::get(Item::NETEHR_STAR, 0, 1);
+					$tier1 = Item::get(Item::PAPER, 0, 1);
 					$tier1->setCustomName(TF::RESET . TF::GOLD . TF::BOLD . "Relic" . TF::RESET . TF::GRAY . " (Click)" . PHP_EOL .
 					TF::GRAY . " * " . TF::GREEN . "A treasure found by mining stone" . PHP_EOL .
-					TF::GRAY . " * " . TF::GREEN . "Tap anywhere to see what it holds");
+					TF::GRAY . " [SKYREALMPE] " . TF::GREEN . "Tap anywhere to see what it holds");
 		
 					$player->getInventory()->addItem($tier1);
 					$player->addtitle(TF::GRAY . "You have found a", TF::GOLD . TF::BOLD . "Relic" . TF::RESET);
@@ -68,13 +68,15 @@ class Main extends PluginBase implements Listener{
   
 				if($item->getName() == TF::RESET . TF::GOLD . TF::BOLD . "Relic" . TF::RESET . TF::GRAY . " (Click)" . PHP_EOL . TF::GRAY . " * " . TF::GREEN . "A treasure found by mining stone" . PHP_EOL . TF::GRAY . " * " . TF::GREEN . "Tap anywhere to see what it holds") {
 		
-					$player->getInventory()->removeItem(Item::get(Item::NETHER_STAR, 0, 1));
+					$player->getInventory()->removeItem(Item::get(Item::PAPER, 0, 1));
 					$player->addTitle(TF::GRAY . "Uncovering", TF::GOLD . TF::BOLD . "Relic");
+					$player->getInventory()->addItem(Item::get(Item::DIAMOND_BLOCK, 0, 10));
+					$this->getServer()->broadcastMessage(TF::GRAY. "[" .TF::GREEN."SKYREALMPE".TF::RESET. TF::GRAY "]". TF::GREEN . "$name has received several items from mining stones!");
 					
 				foreach($this->getConfig()->get("relic-loot") as $rewards) {
 					
 					$player->getInventory()->addItem(Item::get($rewards, 0, mt_rand(1, $this->getConfig()->get("relic-max"))));
-					
+			
 				}
 		}
 	}
