@@ -71,7 +71,7 @@ class Main extends PluginBase implements Listener{
 					$player->getInventory()->removeItem(Item::get(Item::PAPER, 0, 1));
 					$player->addTitle(TF::GRAY . "Uncovering", TF::GOLD . TF::BOLD . "Relic");
 					$player->getInventory()->addItem(Item::get(Item::DIAMOND_BLOCK, 0, 10));
-					$this->getServer()->broadcastMessage(TF::GRAY. "[" .TF::GREEN."SKYREALMPE".TF::RESET. TF::GRAY "]". TF::GREEN . "$name has received several items from mining stones!");
+					$this->getServer()->broadcastMessage(TF::GRAY. "[" .TF::GREEN."SKYREALMPE".TF::RESET. TF::GRAY. "]". TF::GREEN . "$name has received several items from mining stones!");
 					
 				foreach($this->getConfig()->get("relic-loot") as $rewards) {
 					
